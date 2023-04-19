@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  {{#if title}}
+    <title class="alert alert-danger mt-4">
+      {{title}}
+    </title>
+  {{/if}}
+</head>
+<body>
+  {{#if title}}
+  <h4 class="alert alert-info mt-4">
+    {{title}}
+  </h4>
+  {{/if}}
+   {{#if data}}
+      <table class="table table-striped">
+        <thead>
+         <tr>
+          <th>Student ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Course Name</th>
+          <th>Enrollment Date</th>
+          <th>Actions</th>
+         </tr>
+        </thead>
+        <tbody>
+          {{#each data}}
+          <tr>
+            <td>{{this.student_id}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.course_name}}</td>
+            <td>{{this.date_created}}</td>
+            <td>
+              <a class="btn btn-warning m-2" href="/auth/updateStudents/{{this.student_id}}">Edit</a>
+              <a class="btn btn-danger m-2" href="/auth/deleteUser/{{student_id}}" id="delete">Delete</a>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+  {{/if}}
+  <a class="btn btn-info m-5" href="/">Logout</a>
+  <a href="/addStudents" class="btn btn-primary m-5">Add Student</a>
+
+
+</body>
+{{!-- required to be after the body of the html --}}
+  <script>
+    function warning(){
+      const a = confirm('Are you sure you want to delete?');
+      if (a == false){
+        event.preventDefault();
+      }
+      document.getElementById('delete').addEventListener('click', warning());
+    }
+  </script>
+</html>
